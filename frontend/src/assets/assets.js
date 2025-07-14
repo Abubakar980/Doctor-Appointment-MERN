@@ -17,6 +17,7 @@ import dropdown_icon from './dropdown_icon.svg'
 import group_profiles from './group_profiles.png'
 import arrow_icon from './arrow_icon.svg'
 import header_img from './header_img.png'
+import appointment_img from './appointment_img.png'
 
 export const assets = {
     add_icon,
@@ -37,7 +38,8 @@ export const assets = {
     dropdown_icon,
     group_profiles,
     arrow_icon,
-    header_img
+    header_img,
+    appointment_img
 }
 
 import General_physician from './General_physician.svg'
