@@ -18,6 +18,8 @@ import group_profiles from './group_profiles.png'
 import arrow_icon from './arrow_icon.svg'
 import header_img from './header_img.png'
 import appointment_img from './appointment_img.png'
+import verified_icon from './verified_icon.svg'
+import info_icon from './info_icon.svg'
 
 export const assets = {
     add_icon,
@@ -39,7 +41,9 @@ export const assets = {
     group_profiles,
     arrow_icon,
     header_img,
-    appointment_img
+    appointment_img,
+    verified_icon,
+    info_icon
 }
 
 import General_physician from './General_physician.svg'
