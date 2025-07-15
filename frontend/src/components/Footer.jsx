@@ -1,41 +1,63 @@
-import React from 'react'
-import { assets } from '../assets/assets'
+import React from "react";
+import { assets } from "../assets/assets";
 
 const Footer = () => {
   return (
-    <div className='md:mx-10'>
-       <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm'>
+    <div className="max-w-7xl mx-auto px-4 mt-32">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 py-12 border-t border-gray-200 text-sm">
         {/* LEFT */}
         <div>
-            <img className='mb-5 w-40' src={assets.logo} alt="" />
-            <p className='w-full md:w-2/3 text-gray-600 leading-6'>Lorem Ipsum, is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          <img className="mb-5 w-40" src={assets.logo} alt="Logo" />
+          <p className="text-gray-600 leading-6">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
+          </p>
         </div>
+
         {/* CENTER */}
         <div>
-            <p className='text-xl font-medium mb-5'>COMPANY</p>
-            <ul className='flex flex-col gap-2 text-gray-600'>
-                <li>Home</li>
-                <li>About Us</li>
-                <li>Contact Us</li>
-                <li>Privacy Policy</li>
-            </ul>
+          <h4 className="text-lg font-semibold text-gray-800 mb-4">
+            COMPANY
+          </h4>
+          <ul className="space-y-2 text-gray-600">
+            <li className="hover:text-[#5f6fff] cursor-pointer transition">
+              Home
+            </li>
+            <li className="hover:text-[#5f6fff] cursor-pointer transition">
+              About Us
+            </li>
+            <li className="hover:text-[#5f6fff] cursor-pointer transition">
+              Contact Us
+            </li>
+            <li className="hover:text-[#5f6fff] cursor-pointer transition">
+              Privacy Policy
+            </li>
+          </ul>
         </div>
-        {/* RIGHT */}
-        <div>
-            <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
-            <ul className='flex flex-col gap-2 text-gray-600'>
-                <li>+1-212-456-7890</li>
-                <li>forpracticeonly@gmail.com</li>
-            </ul>
-        </div>
-       </div>
-        {/* RIGHT */}
-        <div>
-            <hr className='text-gray-600'/>
-            <p className='text-gray-600 py-5 text-sm text-center'>Copyright © 2024 Abubakar - All Right Reserved.</p>
-        </div>
-    </div>
-  )
-}
 
-export default Footer
+        {/* RIGHT */}
+        <div>
+          <h4 className="text-lg font-semibold text-gray-800 mb-4">
+            GET IN TOUCH
+          </h4>
+          <ul className="space-y-2 text-gray-600">
+            <li className="hover:text-[#5f6fff] transition">
+              +1-212-456-7890
+            </li>
+            <li className="hover:text-[#5f6fff] transition">
+              forpracticeonly@gmail.com
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-gray-200 pt-6 pb-10 text-center text-gray-500 text-xs">
+        &copy; 2024 Abubakar — All Rights Reserved.
+      </div>
+    </div>
+  );
+};
+
+export default Footer;

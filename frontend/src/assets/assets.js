@@ -20,6 +20,8 @@ import header_img from './header_img.png'
 import appointment_img from './appointment_img.png'
 import verified_icon from './verified_icon.svg'
 import info_icon from './info_icon.svg'
+import about_image from './about_image.png'
+import contact_image from './contact_image.png'
 
 export const assets = {
     add_icon,
@@ -43,7 +45,9 @@ export const assets = {
     header_img,
     appointment_img,
     verified_icon,
-    info_icon
+    info_icon,
+    about_image,
+    contact_image
 }
 
 import General_physician from './General_physician.svg'
