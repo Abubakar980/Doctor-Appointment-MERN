@@ -9,6 +9,11 @@ export const addDoctor = async () => {
 
         console.log({name, email, password, speciality, degree, experience, about, fees, address}, imageFile);
         
+        if(!name || !email || !password || !speciality || !degree || !experience || !about || !fees || !address){
+            return res.json({success:false, message:"Missing Details"})
+        }
+
+
     } catch (error) {
         
     }
