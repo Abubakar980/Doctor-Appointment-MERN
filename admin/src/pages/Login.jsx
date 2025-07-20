@@ -68,7 +68,7 @@ const Login = () => {
           />
         </div>
 
-        <button type="submit" className='bg-[#5f65ff] text-white w-full py-2 rounded-md text-base'>
+        <button type="submit" className='bg-[#5f65ff] cursor-pointer text-white w-full py-2 rounded-md text-base'>
           Login
         </button>
 
