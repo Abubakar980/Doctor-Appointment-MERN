@@ -10,6 +10,7 @@ export const AppContextProvider = (props) => {
 
     const currencySymbol = '$'
     const [doctors, setDoctors] = useState([])
+    const [token, setToken] = useState(localStorage.getItem('token')?localStorage.getItem('token'):false)
 
 
     const getDoctorsData = async () => {
@@ -32,7 +33,8 @@ export const AppContextProvider = (props) => {
 
     const value = {
         doctors,
-        currencySymbol
+        currencySymbol,
+        token, setToken
     }
 
     return(
