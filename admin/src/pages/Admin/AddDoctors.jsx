@@ -1,6 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { assets } from '../../assets/assets'
 import { AdminContext } from '../../context/AdminContext'
+import { toast } from 'react-toastify'
+import axios from 'axios'
+
 
 const AddDoctors = () => {
   const [docImg, setDocImg] = useState(false)
@@ -21,8 +24,51 @@ const AddDoctors = () => {
     event.preventDefault();
 
     try {
-      
+
+      if(!docImg){
+        return toast.error("Image Not Selected")
+      }
+
+      const formData = new FormData()
+
+      formData.append('image', docImg)
+      formData.append('name', name)
+      formData.append('email', email)
+      formData.append('password', password)
+      formData.append('experience', experience)
+      formData.append('fees', Number(fees))
+      formData.append('about', about)
+      formData.append('speciality', speciality)
+      formData.append('degree', degree)
+      formData.append('address', JSON.stringify({line1:address1, line2:address2}))
+
+      formData.forEach((value, key)=>{
+        console.log(`${key} : ${value}`);
+      })
+
+
+      const {data} = await axios.post(`http://localhost:3000/api/admin/add-doctor`, formData, {headers: {aToken}})
+
+      if(data.success){
+        toast.success(data.message)
+        setDocImg(false)
+        setName('')
+        setPassword('')
+        setEmail('')
+        setAddress1('')
+        setAddress2('')
+        setDegree('')
+        setAbout('')
+        setFees('')
+        
+      } else {
+        toast.error(data.message)
+      }
+
+
     } catch (error) {
+      toast.error(error.message)
+      console.log("Error :" , error);
       
     }
   }
@@ -110,7 +156,7 @@ const AddDoctors = () => {
           <textarea value={about} onChange={(e) => setAbout(e.target.value)} rows={5} placeholder='Write about doctor...' required className='w-full border border-gray-500 rounded px-4 pt-2' />
         </div>
 
-        <button type='submit' className='bg-[#5F6FFF] px-10 py-3 mt-4 text-white rounded-full'>Add Doctor</button>
+        <button onClick={onSubmitHandler} type='submit' className='bg-[#5F6FFF] px-10 py-3 mt-4 text-white rounded-full'>Add Doctor</button>
       </div>
     </form>
   )

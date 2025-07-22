@@ -66,13 +66,13 @@ export const addDoctor = async (req, res) => {
 
 
 
+
 export const loginAdmin = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Properly compare both email and password
         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-            const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "1d" });
+            const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
             return res.status(200).json({
                 success: true,
