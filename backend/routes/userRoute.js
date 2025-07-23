@@ -1,5 +1,7 @@
 import express from 'express'
-import { loginUser, registerUser } from '../controllers/userController.js'
+import { getProfile, loginUser, registerUser, updateProfile } from '../controllers/userController.js'
+import authUser from '../middlewares/authUser.js'
+import upload from '../middlewares/multer.js'
 
 
 
@@ -10,5 +12,14 @@ userRouter.post('/register', registerUser)
 
 userRouter.post('/login', loginUser)
 //http://localhost:3000/api/user/login
+
+userRouter.get('/get-profile', authUser, getProfile)
+//http://localhost:3000/api/user/get-profile
+
+userRouter.post('/update-profile', upload.single("image"),authUser, updateProfile)
+//http://localhost:3000/api/user/update-profile
+
+
+
 
 export default userRouter
