@@ -11,6 +11,9 @@ const authUser = async (req, res, next) => {
 
         req.user = { id: token_decode.id }; // ✅ safer and correct
 
+        console.log("Authenticated User:", token_decode);
+
+
         next();
     } catch (error) {
         console.log(error);
