@@ -64,9 +64,6 @@ export const addDoctor = async (req, res) => {
     }
 }
 
-
-
-
 export const loginAdmin = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -89,13 +86,20 @@ export const loginAdmin = async (req, res) => {
     }
 };
 
-
-
-
 export const allDoctors = async (req, res) => {
     try {
         const doctors = await doctorModel.find({}).select('-password')
         res.json({success:true, doctors})
+    } catch (error) {
+        console.log(error);
+        res.json({success:false,message:error.message})
+    }
+}
+
+export const appointmentsAdmin = async (req, res) => {
+    try {
+        const appointments = await appointmentModel.find({})
+        res.json({success:true, appointments})
     } catch (error) {
         console.log(error);
         res.json({success:false,message:error.message})
