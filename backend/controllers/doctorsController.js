@@ -1,6 +1,7 @@
 import doctorModel from "../models/doctorModel.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import appointmentModel from "../models/appointmentModel.js";
 
 
 
@@ -46,6 +47,18 @@ export const loginDoctor = async (req, res) => {
         }
 
 
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+
+export const appointmentsDoctor = async (req, res) => {
+    try {
+        const docId = req.doctor.id; // ✅ Get from token
+        const appointments = await appointmentModel.find({ docId });
+        res.json({ success: true, appointments });
     } catch (error) {
         console.log(error);
         res.json({ success: false, message: error.message });
