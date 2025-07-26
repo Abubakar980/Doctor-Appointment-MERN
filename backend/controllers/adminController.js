@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import {v2 as cloudinary} from 'cloudinary'
 import doctorModel from '../models/doctorModel.js';
 import jwt from 'jsonwebtoken'
+import appointmentModel from '../models/appointmentModel.js'
 
 
 // API FOR ADDING DOCTORS
@@ -105,3 +106,35 @@ export const appointmentsAdmin = async (req, res) => {
         res.json({success:false,message:error.message})
     }
 }
+
+export const cancelAppointmentAdmin = async (req, res) => {
+  try {
+    const { appointmentId } = req.body;
+
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    if (!appointmentData) {
+      return res.json({ success: false, message: "Appointment not found" });
+    }
+
+    const { docId, slotDate, slotTime } = appointmentData;
+
+    const doctorData = await doctorModel.findById(docId);
+    let slots_booked = doctorData.slots_booked;
+
+    // Remove the time slot from the booked list
+    slots_booked[slotDate] = slots_booked[slotDate]?.filter(e => e !== slotTime);
+
+    // ✅ update both doctor and appointment
+    await doctorModel.findByIdAndUpdate(docId, { slots_booked });
+
+    // ✅ set appointment as cancelled
+    await appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true });
+
+    return res.json({ success: true, message: "Appointment cancelled successfully" });
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
