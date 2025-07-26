@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { createContext } from "react";
 
 export const DoctorContext = createContext()
 
 const DoctorContextProvider = (props) => {
-    const value = {
 
+    const [dToken, setDToken] = useState(localStorage.getItem('dToken')?localStorage.getItem('dToken'):'')
+
+
+    const value = {
+        dToken, setDToken
     }
 
     return (
