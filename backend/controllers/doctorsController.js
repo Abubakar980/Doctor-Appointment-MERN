@@ -64,3 +64,78 @@ export const appointmentsDoctor = async (req, res) => {
         res.json({ success: false, message: error.message });
     }
 }
+
+
+
+
+// Complete Appointment
+export const appointmentComplete = async (req, res) => {
+  try {
+    const docId = req.doctor.id;
+    const { appointmentId } = req.body;
+
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    if (appointmentData && appointmentData.docId == docId) {
+      await appointmentModel.findByIdAndUpdate(appointmentId, { isCompleted: true });
+      return res.json({ success: true, message: "Appointment Completed" });
+    } else {
+      return res.json({ success: false, message: "Mark Failed" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// Cancel Appointment
+export const appointmentCancel = async (req, res) => {
+  try {
+    const docId = req.doctor.id;
+    const { appointmentId } = req.body;
+
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    if (appointmentData && appointmentData.docId == docId) {
+      await appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true });
+      return res.json({ success: true, message: "Appointment Cancelled" });
+    } else {
+      return res.json({ success: false, message: "Cancellation Failed" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+
+
+
+export const doctorDashboard = async (req, res) => {
+    try {
+
+        const {docId} = req.body;
+        const appointments = await appointmentModel.find({docId})
+
+        let earnings = 0
+
+        appointments.map((item)=> {
+            if(item.isCompleted || item.payment){
+                earnings += item.amount
+            }
+        })
+
+        const dashData = {
+            earnings, 
+            appointments: appointments.length,
+            patients: patients.length,
+            latestAppointments: appointments.reverse().slice(0,5)
+        }
+
+        res.json({success:true, dashData})
+        
+    } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+}
