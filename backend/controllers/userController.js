@@ -250,6 +250,10 @@ export const cancelAppointment = async (req, res) => {
 };
 
 
+export const paymentOnline = async (req, res) => {
+  try
+}
+
 
 
 
